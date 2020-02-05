@@ -1,4 +1,4 @@
-/** Le istanze delle sottoclassi di questa classe astratta implementano strumenti di disegno
+/** Le sottoclassi di questa classe astratta implementano strumenti di disegno
  *
  *
  */
