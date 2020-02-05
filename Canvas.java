@@ -7,7 +7,7 @@ public class Canvas {
 	public Canvas(int righe, int colonne) {
 		this.R=righe;
 		this.C=colonne;
-		this.caratteri = new char[C][R];
+		this.caratteri = new char[R][C];
 		for(int i=0;i<R;i++) {
 			for(int j=0;j<C;j++)
 				caratteri[i][j]=' ';
@@ -26,13 +26,27 @@ public class Canvas {
 		return this.caratteri[x][y]==' ';
 	}
 	
-	public boolean modifica(int x, int y, char c) {
-		if( !(x<C && x>0 && y<R && y>0))
-			return false; //Non posso modificare
-		else {
-		this.caratteri[x][y]='c';
-		return true;
-		}
+	/**
+	 * controlla se le coordinate rispettano le dimensioni del canvas
+	 * @param x il numero di riga da modificare
+	 * @param y il numero di colonna da modificare
+	 * @return true se e solo se 0<x<R e 0<y<C
+	 */
+	
+	public boolean possoModifica(int x, int y) {
+		return x<R && x>0 && y<C && y>0;
+	}
+	
+	/**
+	 * sostituisce il carattere di canvas conil nuovo carattere c in ingresso se 
+	 * le dimensioni sono rispettate 
+	 * @param x il numero di riga da modificare
+	 * @param y il numero di colonna da modificare
+	 * @param c il carattere da mettere nella posizione (x,y)
+	 */
+	public void modifica(int x, int y, char c) {
+		if( this.possoModifica(x, y) )
+			this.caratteri[x][y]= c;
 	}
 	
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
