@@ -5,7 +5,8 @@
 public abstract class Strumento {
 
   /** Questo &egrave; il riferimento al canvas su cui opera uno Strumento */
-  private Canvas canvas;
+  protected Canvas canvas;
+  /* protected perché viene usato dalle istanze di ogni sottoclasse concreta */
 
   //COSTRUTTORI
   /** Associa allo Strumento il canvas su cui agire
