@@ -1,3 +1,5 @@
+/*
+
 package it.unimi.di.boldi.mat;
 
 import java.awt.BorderLayout;
@@ -224,3 +226,4 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 	}
 
 }
+*/
