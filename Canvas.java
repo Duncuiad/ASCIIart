@@ -53,7 +53,7 @@ public class Canvas {
 	 */
 
 	public boolean possoModifica(int x, int y) {
-		return x<R && x>0 && y<C && y>0;
+		return x>= 0 && x<R && y>=0 && y<R;
 	}
 
 	/**
@@ -136,6 +136,17 @@ public class Canvas {
 			return newCanvas;
 		}
 
+		@Override
+		public String toString() {
+			String stringa = "";
+			for (int i=0; i<this.R; i++) {
+				for (int j=0; j<C; j++) {
+					stringa += this.car(i, j);
+				}
+				stringa += "\n";
+			}
+			return stringa;
+		}
 
 
 }
