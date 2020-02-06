@@ -81,31 +81,36 @@ public class Canvas {
 		}
 	}
 
-	public Canvas undo(int k) {
-		Canvas canvas = this.copia();
-		for(int i=0;i<k;i++) {
+	public void undo(int k) {
+		Canvas buffer = this.copia();
+		for (int i=0; i<k; i++) {
 			try {
-				canvas=this.pila.pop();
-			}catch(EmptyStackException e){
-				return new Canvas(this.getR(),this.getC());
-		}
+				buffer=this.pila.pop();
+			} catch(EmptyStackException e) {
+				// nulla
+				break; // esce dal for
 			}
-		return canvas;
+		}
+		for (int i=0; i<this.R; i++) {
+			for (int j=0; j<this.C; i++) {
+				this.modifica(i, j, buffer.car(i, j)); //deep copy
+			}
+		}
 	}
 
 		public Canvas copia() {
 			int r=this.getR();
 			int c=this.getC();
-			Canvas canvas = new Canvas(r,c);
+			Canvas newCanvas = new Canvas(r,c);
 			for(int i=0;i<r;i++) {
 				for(int j=0;j<c;j++)
-					canvas.caratteri[i][j]=this.car(i,j);
+					newCanvas.modifica(i, j, this.car(i,j));
 			}
-			return canvas;
+			return newCanvas;
 		}
-		
+
 		/**
-		 * restituisce un nuovo canvas, copia del rettangolo di estremi (x1,y1),(x2,y2) 
+		 * restituisce un nuovo canvas, copia del rettangolo di estremi (x1,y1),(x2,y2)
 		 * del canvas su cui e' incocato
 		 * @param x1 numero di riga del primo punto
 		 * @param y1 numero di colonna del primo punto
@@ -115,24 +120,20 @@ public class Canvas {
 		 */
 
 		public Canvas copia(int x1,int y1,int x2,int y2) {
+			// ampiezza del rettangolo selezionato
 			int r=Math.abs(x2-x1);
 			int c=Math.abs(y2-y1);
-			Canvas canvas = new Canvas(r,c);
-			int i=x1, j=y1;
-			while(Math.abs(i)<r){
-				while(Math.abs(j)<c) {
-					canvas.caratteri[i][j]=this.car(i,j);
-					if(y1<y2)
-						j++;
-					else
-						j--;
+			// estremo in basso a sinistra del rettangolo selezionato
+			int x0=Math.min(x1, x2);
+			int y0=Math.min(y1,y2);
+			// corpo
+			Canvas newCanvas = new Canvas(r,c);
+			for (int i=0; i<r; i++) {
+				for (int j=0; j<c; j++) {
+					newCanvas.modifica(i, j, this.car(x0+i, y0+j));
 				}
-				if(x1<x2)
-					i++;
-				else
-					i--;
 			}
-			return canvas;
+			return newCanvas;
 		}
 
 
