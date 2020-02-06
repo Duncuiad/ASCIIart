@@ -135,6 +135,29 @@ public class Canvas {
 			}
 			return newCanvas;
 		}
+		
+		public boolean equals(Object other) {
+			if(other instanceof Canvas)
+				return equals ((Canvas) other);
+			else
+				return false;
+		}
+		
+		public boolean equals(Canvas newCanvas) {
+			if(newCanvas==null)
+				return false;
+			
+			if(! (this.R==newCanvas.R && this.C==newCanvas.C ) )
+				return false;
+			
+			int i,j;
+			for(i=0;i<this.R;i++) {
+				for(j=0;j<this.C;j++)
+					if( this.car(i,j) != newCanvas(i,j) )
+						break;
+			}
+			return i==this.R && j==this.C;
+		}
 
 		@Override
 		public String toString() {
