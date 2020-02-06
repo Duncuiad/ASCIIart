@@ -4,6 +4,7 @@
  */
 public abstract class StrumentoDiDisegno extends Strumento {
 
+  //ATTRIBUTI
   /** Questo &egrave; il tratto di disegno corrente, comune a tutte le istanze di StrumentoDiDisegno */
   private static char trattoDiDisegno = '*';
   /* protected perché viene usato dalle istanze di ogni sottoclasse concreta */

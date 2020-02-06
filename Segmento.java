@@ -4,6 +4,7 @@
  */
 public class Segmento extends StrumentoDiDisegno {
 
+  //ATTRIBUTI
   /** Coordinate del primo estremo del segmento */
   private int x1, y1;
   /** Coordinate del secondo estremo del segmento */
@@ -11,6 +12,7 @@ public class Segmento extends StrumentoDiDisegno {
   /** Controlla se l'inizio del trascinamento &egrave; stato effettuato con il tasto sinistro */
   private boolean isLeftClick;
 
+  //METODI
   /** Si occupa di gestire gli input da mouse
   * @param e evento corrente
   *

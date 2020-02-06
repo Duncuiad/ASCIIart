@@ -1,5 +1,6 @@
 public class EventoDiMouse implements Evento {
 
+  //ATTRIBUTI
   /** La coordinata orizzontale dell'evento */
   private int x;
 
