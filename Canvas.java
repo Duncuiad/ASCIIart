@@ -14,7 +14,7 @@ public class Canvas {
 			for(int j=0;j<C;j++)
 				caratteri[i][j]=' ';
 		}
-		this.pila= new Stack();
+		this.pila= new Stack<Canvas>();
 	}
 
 
