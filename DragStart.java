@@ -1,5 +1,6 @@
 public class DragStart extends EventoDiMouse {
 
+  //ATTRIBUTI
   /** true sse l'evento &egrave; stato chiamato col tasto destro del mouse */
   public boolean right;
 

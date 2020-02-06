@@ -4,6 +4,7 @@
  */
 public abstract class Strumento {
 
+  //ATTRIBUTI
   /** Questo &egrave; il riferimento al canvas su cui opera uno Strumento */
   protected Canvas canvas;
   /* protected perché viene usato dalle istanze di ogni sottoclasse concreta */
