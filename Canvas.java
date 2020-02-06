@@ -4,7 +4,7 @@ public class Canvas {
 	private int R;
 	private int C;
 	private char[][] caratteri;
-	private static Stack pila;
+	private Stack<Canvas> pila;
 	
 	public Canvas(int righe, int colonne) {
 		this.R=righe;
@@ -26,7 +26,7 @@ public class Canvas {
 		return this.C;
 	}
 	
-	public static Stack getStack() {
+	public Stack<Canvas> getStack() {
 		return pila;
 	}
 	/**
@@ -80,6 +80,19 @@ public class Canvas {
 			j+=passoColonne;
 		}
 	}
+	
+	public Canvas undo(int k) {
+		Canvas canvas = this.copia();
+		for(int i=0;i<k;i++) {
+			try {
+				canvas=this.pila.pop();
+			}catch(EmptyStackException e){
+				return new Canvas(this.getR(),this.getC());
+		}
+			}
+		return canvas;
+	}
+	
 		public Canvas copia() {
 			int r=this.getR();
 			int c=this.getC();
