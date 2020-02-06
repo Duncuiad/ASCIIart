@@ -21,9 +21,19 @@ public class Canvas {
 	public int getC() {
 		return this.C;
 	}
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return il carattere in posizione (x,y)
+	 */
+	
+	public char car(int x, int y) {
+		return this.caratteri[x][y];
+	}
 	
 	public boolean vuota(int x, int y) {
-		return this.caratteri[x][y]==' ';
+		return this.car(x,y)==' ';
 	}
 	
 	/**
@@ -52,7 +62,16 @@ public class Canvas {
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
 		int l=Math.abs(x1-x2);
 		int h=Math.abs(y1-y2);
+		int i,j=Math.min(y1, y2);
+		int passoRighe=0;//bisogna capire come approssimare i passi
+		int passoColonne=0;
+		for(i=Math.min(x1, x2);i<l;i+=passoRighe) {
+			if( this.possoModifica(i,j) )
+				this.modifica(i, j, c);
+			j+=passoColonne;
+		}
 		
-	}
 	
+	
+}
 }
