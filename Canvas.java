@@ -27,7 +27,7 @@ public class Canvas {
 	}
 
 	public Stack<Canvas> getStack() {
-		return pila;
+		return this.pila;
 	}
 	/**
 	 *
@@ -103,6 +103,16 @@ public class Canvas {
 			}
 			return canvas;
 		}
+		
+		/**
+		 * restituisce un nuovo canvas, copia del rettangolo di estremi (x1,y1),(x2,y2) 
+		 * del canvas su cui e' incocato
+		 * @param x1 numero di riga del primo punto
+		 * @param y1 numero di colonna del primo punto
+		 * @param x2 numero di riga del secondo punto
+		 * @param y2 numero di colonna del secondo punto
+		 * @return canvas di estremi (x1,y1),(x2,y2)
+		 */
 
 		public Canvas copia(int x1,int y1,int x2,int y2) {
 			int r=Math.abs(x2-x1);
