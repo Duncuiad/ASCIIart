@@ -92,7 +92,7 @@ public class Canvas {
 			}
 		}
 		for (int i=0; i<this.R; i++) {
-			for (int j=0; j<this.C; i++) {
+			for (int j=0; j<this.C; j++) {
 				this.modifica(i, j, buffer.car(i, j)); //deep copy
 			}
 		}
