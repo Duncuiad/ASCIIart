@@ -71,13 +71,25 @@ public class Canvas {
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
 		int l=Math.abs(x1-x2);
 		int h=Math.abs(y1-y2);
-		int i,j=Math.min(y1, y2);
-		int passoRighe=0;//bisogna capire come approssimare i passi
-		int passoColonne=0;
-		for(i=Math.min(x1, x2);i<l;i+=passoRighe) {
-			if( this.possoModifica(i,j) )
-				this.modifica(i, j, c);
-			j+=passoColonne;
+		if (l>h) {
+			int x0 = Math.min(x1,x2);
+			int y0 = (x0 == x1 ? y1 : y2);
+			double yPosition = (double) y0;
+			double angCoeff = ((double) (y2-y1))/(x2-x1); // il coefficiente angolare del segmento
+			for (int i=0; i<l; i++) {
+				this.modifica(x0+i, (int) yPosition, c);
+				yPosition += angCoeff; // sottinteso che l'incremento in x sia uguale a 1
+			}
+		}
+		else {
+			int y0 = Math.min(y1,y2);
+			int x0 = (y0 == y1 ? x1 : x2);
+			double xPosition = (double) x0;
+			double invAngCoeff = ((double) (x2-x1))/(y2-y1); // il reciproco del coefficiente angolare del segmento
+			for (int i=0; i<h; i++) {
+				this.modifica((int) xPosition, y0+i, c);
+				xPosition += invAngCoeff; // sottinteso che l'incremento in x sia uguale a 1
+			}
 		}
 	}
 
