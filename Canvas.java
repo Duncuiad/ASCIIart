@@ -1,8 +1,10 @@
+import java.util.*;
 public class Canvas {
 	
 	private int R;
 	private int C;
 	private char[][] caratteri;
+	private static Stack pila;
 	
 	public Canvas(int righe, int colonne) {
 		this.R=righe;
@@ -12,7 +14,9 @@ public class Canvas {
 			for(int j=0;j<C;j++)
 				caratteri[i][j]=' ';
 		}
+		this.pila= new Stack();
 	}
+	
 	
 	public int getR() {
 		return this.R;
@@ -21,12 +25,17 @@ public class Canvas {
 	public int getC() {
 		return this.C;
 	}
+	
+	public static Stack getStack() {
+		return pila;
+	}
 	/**
 	 * 
 	 * @param x
 	 * @param y
 	 * @return il carattere in posizione (x,y)
 	 */
+	
 	
 	public char car(int x, int y) {
 		return this.caratteri[x][y];
@@ -70,8 +79,39 @@ public class Canvas {
 				this.modifica(i, j, c);
 			j+=passoColonne;
 		}
+	}
+		public Canvas copia() {
+			int r=this.getR();
+			int c=this.getC();
+			Canvas canvas = new Canvas(r,c);
+			for(int i=0;i<r;i++) { 
+				for(int j=0;j<c;j++)
+					canvas.caratteri[i][j]=this.car(i,j);
+			}
+			return canvas;
+		}
 		
+		public Canvas copia(int x1,int y1,int x2,int y2) {
+			int r=Math.abs(x2-x1);
+			int c=Math.abs(y2-y1);
+			Canvas canvas = new Canvas(r,c);
+			int i=x1, j=y1;
+			while(Math.abs(i)<r){ 
+				while(Math.abs(j)<c) {
+					canvas.caratteri[i][j]=this.car(i,j);
+					if(y1<y2)
+						j++;
+					else
+						j--;
+				}
+				if(x1<x2)
+					i++;
+				else
+					i--;
+			}
+			return canvas;
+		}
 	
 	
-}
+	
 }
