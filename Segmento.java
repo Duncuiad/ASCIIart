@@ -28,13 +28,13 @@ public class Segmento extends StrumentoDiDisegno {
 
     // caso DragStart
     if (e instanceof DragStart) {
-      this.pIniziale = new DragStart((DragStart) e);
+    	this.pIniziale = (DragStart) e;
     }
 
     // caso DragEnd
     if (e instanceof DragEnd) {
       if (!(this.pIniziale.right())) {
-        this.pFinale = new DragEnd((DragEnd) e);
+    	  this.pFinale = (DragEnd) e;
         canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // stampa il segmento
         // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque pIniziale non è null
       }
