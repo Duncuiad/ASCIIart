@@ -29,6 +29,7 @@ public class Segmento extends StrumentoDiDisegno {
         this.isLeftClick = true;
         this.x1 = e.posx();
         this.y1 = e.posy();
+        canvas.addToHistory();
       }
       else {
         this.isLeftClick = false;
@@ -44,6 +45,11 @@ public class Segmento extends StrumentoDiDisegno {
         // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque x1 e y1 sono inizializzati
       }
     }
+  }
+
+  @Override
+  public String toString() {
+    return "Segmento: " + super.toString();
   }
 
 }

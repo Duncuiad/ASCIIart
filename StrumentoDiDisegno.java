@@ -25,4 +25,9 @@ public abstract class StrumentoDiDisegno extends Strumento {
     return trattoDiDisegno;
   }
 
+  @Override
+  public String toString() {
+    return "Strumento di disegno, tratto: " + this.getTratto() + ". " + super.toString();
+  }
+
 }

@@ -94,4 +94,21 @@ public class Toolbox {
 	  }
   }
 
+  @Override
+  public String toString() {
+    String stringa = "Toolbox collegata al canvas " + this.canvas.hashCode() + ". ";
+    if (strumenti != null) {
+		stringa += "Strumenti collegati: ";
+		for (Character key: this.strumenti.keySet()) {
+			stringa += (this.strumenti.get(key).getClass().getSimpleName()) + " (" + key + "), "; //nome dello strumento + etichetta
+		}
+    }
+    if (attivo != null) {
+    	stringa += "strumento attivo: " + this.attivo.getClass().getSimpleName();
+    } else {
+    	stringa += "nessuno strumento attivo";
+    }
+    return stringa;
+  }
+
 }
