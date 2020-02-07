@@ -36,11 +36,12 @@ public class Cerchio extends StrumentoDiDisegno {
 			  secondoClick = (MouseClick) e;
 			  
 			  if ( !(secondoClick.rightClick()) ) { // se click sinistro
+				  
 				  int deltaXSquared = (primoClick.posx()-secondoClick.posx());
 				  deltaXSquared *= deltaXSquared;
 				  int deltaYSquared = (primoClick.posy()-secondoClick.posy());
 				  deltaYSquared *= deltaYSquared;
-				  int distanza = (int) Math.round( Math.sqrt((deltaXSquared + deltaYSquared)) );
+				  int distanza = (int) Math.round( Math.sqrt( (double) (deltaXSquared + deltaYSquared) ) );
 				  
 			  }
 			  
