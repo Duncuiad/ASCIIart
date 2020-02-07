@@ -176,6 +176,16 @@ public class Canvas {
 			}
 			return newCanvas;
 		}
+		
+		@Override 
+		public int hashCode() {
+			int sumEntries=0;
+			for(int i=0;i<this.R;i++) {
+				for(int j=0;j<this.C;j++)
+					sumEntries+=this.car(i, j);
+			}
+			return sumEntries;
+		}
 
 		@Override
 		public boolean equals(Object other) {
