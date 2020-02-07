@@ -23,7 +23,14 @@ public class MouseClick extends EventoDiMouse {
     this.rightClick = rightClick;
     this.doubleClick = doubleClick;
   }
+  
+  public MouseClick(MouseClick e) {
+	  super(e);
+	  this.rightClick = e.rightClick;
+	  this.doubleClick = e.doubleClick;
+  }
 
+  //METODI
   /** Restituisce true se si &egrave; premuto il tasto destro del mouse
    *
    * @return true se si &egrave; premuto il tasto destro del mouse

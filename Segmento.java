@@ -6,11 +6,10 @@ public class Segmento extends StrumentoDiDisegno {
 
   //ATTRIBUTI
   /** Coordinate del primo estremo del segmento */
-  private int x1, y1;
+  private DragStart pIniziale;
   /** Coordinate del secondo estremo del segmento */
-  private int x2, y2;
+  private DragEnd pFinale;
   /** Controlla se l'inizio del trascinamento &egrave; stato effettuato con il tasto sinistro */
-  private boolean isLeftClick;
 
   //COSTRUTTORI
   public Segmento(Canvas canvas) {
@@ -29,26 +28,20 @@ public class Segmento extends StrumentoDiDisegno {
 
     // caso DragStart
     if (e instanceof DragStart) {
-      DragStart evento = (DragStart) e; //cast
-      if ( !(evento.right()) ) {
-        this.isLeftClick = true;
-        this.x1 = e.posx();
-        this.y1 = e.posy();
-        canvas.addToHistory();
-      }
-      else {
-        this.isLeftClick = false;
-      }
+      this.pIniziale = new DragStart((DragStart) e);
     }
 
     // caso DragEnd
     if (e instanceof DragEnd) {
-      if (this.isLeftClick) {
-        this.x2 = e.posx();
-        this.y2 = e.posy();
-        canvas.modifica(x1, y1, x2, y2, super.getTratto()); // stampa il segmento
-        // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque x1 e y1 sono inizializzati
+      if (!(this.pIniziale.right())) {
+        this.pFinale = new DragEnd((DragEnd) e);
+        canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // stampa il segmento
+        // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque pIniziale non è null
       }
+      
+      // torna allo stato neutro
+      this.pIniziale = null;
+      this.pFinale = null;
     }
   }
 

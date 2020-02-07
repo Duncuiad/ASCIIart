@@ -15,6 +15,11 @@ public class DragStart extends EventoDiMouse {
     super(x,y);
     this.right = right;
   }
+  
+  public DragStart(DragStart e) {
+	  super(e);
+	  this.right = e.right;
+  }
 
   //METODI
   /** Determina se l'evento &egrave; stato chiamato col tasto destro del mouse

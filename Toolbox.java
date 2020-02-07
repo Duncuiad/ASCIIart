@@ -1,4 +1,5 @@
-import java.util.*; //Map<K,V>, HashMap<K,V>
+import java.util.Map; //Map<K,V>, HashMap<K,V>
+import java.util.HashMap;
 
 /** Insieme di strumenti, ciascuno associato a un carattere in modo univoco, e in cui al pi&ugrave; uno strumento &egrave; in ogni istante attivo
  *

@@ -21,6 +21,10 @@ public class EventoDiMouse implements Evento {
     this.x = x;
     this.y = y;
   }
+  
+  public EventoDiMouse(EventoDiMouse e) {
+	  this(e.posx(), e.posy());
+  }
 
   //METODI
   /** Restituisce la coordinata orizzontale dell'evento
