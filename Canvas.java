@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Stack;
+import java.util.EmptyStackException;
 public class Canvas {
 
 	private int R;
