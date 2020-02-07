@@ -53,6 +53,7 @@ public class Canvas {
 			System.err.println("Errore in canvas " + this.R + "x" + this.C +
 			": non posso accedere al carattere in posizione " + x + ", " + y
 			+ " (Out of bounds)");
+			return '0';
 		}
 	}
 
@@ -195,10 +196,10 @@ public class Canvas {
 			int i,j;
 			for(i=0;i<this.R;i++) {
 				for(j=0;j<this.C;j++)
-					if( this.car(i,j) != newCanvas(i,j) )
-						break;
+					if( this.car(i,j) != newCanvas.car(i,j) )
+						return false;
 			}
-			return i==this.R && j==this.C;
+			return true;
 		}
 
 		@Override
