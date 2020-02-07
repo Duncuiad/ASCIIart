@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.SwingUtilities;
 
 public class ASCIIArt extends JFrame implements MouseListener, WindowListener, KeyListener, MouseMotionListener, TableCellRenderer {
 
@@ -150,7 +151,7 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 		if (!dragging) {
 			dragFromX = getX(e);
 			dragFromY = getY(e);
-			dragRight = e.getButton() == 3;
+			dragRight = SwingUtilities.isRightMouseButton(e);
 			dragStartLaunched = false;
 			dragging = true;
 		} else if (!dragStartLaunched && (getX(e) != dragFromX || getY(e) != dragFromY)) mouseMoved(e);
