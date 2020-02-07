@@ -25,4 +25,9 @@ public class DragStart extends EventoDiMouse {
     return this.right;
   }
 
+  @Override
+  public String toString() {
+    return super.toString() + ", di tipo DragStart. " + (right ? "Tasto destro" : "Tasto Sinistro");
+  }
+
 }

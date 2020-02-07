@@ -39,4 +39,9 @@ public class EventoDiMouse implements Evento {
     return this.y;
   }
 
+  @Override
+  public String toString() {
+    return "Evento di mouse in pos. (" + this.posx() + "," + this.posy() + ")";
+  }
+
 }

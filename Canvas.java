@@ -193,8 +193,8 @@ public class Canvas {
 			}
 			return newCanvas;
 		}
-		
-		@Override 
+
+		@Override
 		public int hashCode() {
 			int sumEntries=0;
 			for(int i=0;i<this.R;i++) {
