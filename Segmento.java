@@ -29,6 +29,7 @@ public class Segmento extends StrumentoDiDisegno {
     // caso DragStart
     if (e instanceof DragStart) {
     	this.pIniziale = (DragStart) e;
+    	this.canvas.addToHistory();
     }
 
     // caso DragEnd
