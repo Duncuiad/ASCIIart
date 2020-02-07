@@ -5,11 +5,10 @@
 public class Segmento extends StrumentoDiDisegno {
 
   //ATTRIBUTI
-  /** Coordinate del primo estremo del segmento */
+  /** Primo evento da registrare */
   private DragStart pIniziale;
-  /** Coordinate del secondo estremo del segmento */
+  /** Secondo evento da registrare */
   private DragEnd pFinale;
-  /** Controlla se l'inizio del trascinamento &egrave; stato effettuato con il tasto sinistro */
 
   //COSTRUTTORI
   public Segmento(Canvas canvas) {
@@ -28,14 +27,15 @@ public class Segmento extends StrumentoDiDisegno {
 
     // caso DragStart
     if (e instanceof DragStart) {
-    	this.pIniziale = (DragStart) e;
     	this.canvas.addToHistory();
+    	this.pIniziale = (DragStart) e;
+    	canvas.modifica(pIniziale.posx(), pIniziale.posy(), super.getTratto()); // evidenzia il punto di partenza
     }
 
     // caso DragEnd
     if (e instanceof DragEnd) {
       if (!(this.pIniziale.right())) {
-    	  this.pFinale = (DragEnd) e;
+    	this.pFinale = (DragEnd) e;
         canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // stampa il segmento
         // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque pIniziale non è null
       }

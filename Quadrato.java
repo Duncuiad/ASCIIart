@@ -1,9 +1,11 @@
 public class Quadrato extends StrumentoDiDisegno {
 		
   //ATTRIBUTI
-  DragStart pIniziale;
-  DragEnd pFinale;
-
+  /** Primo evento da registrare */
+  private DragStart pIniziale;
+  /** Secondo evento da registrare */
+  private DragEnd pFinale;
+  
   //COSTRUTTORI
   public Quadrato(Canvas canvas) {
 	  super(canvas);
@@ -15,8 +17,9 @@ public class Quadrato extends StrumentoDiDisegno {
 
     // caso DragStart
     if (e instanceof DragStart) {
-    	this.pIniziale = (DragStart) e;
     	this.canvas.addToHistory();
+    	this.pIniziale = (DragStart) e;
+    	canvas.modifica(pIniziale.posx(), pIniziale.posy(), super.getTratto()); // evidenzia il punto di partenza
     }
 
     // caso DragEnd
@@ -35,6 +38,15 @@ public class Quadrato extends StrumentoDiDisegno {
       this.pFinale = null;
     }
   }
+  
+  @Override
+  public boolean equals(Object altro) {
+    if (altro instanceof Quadrato) {
+      return true;
+    } else {
+      return false;
+    }
+  } // hashCode overridden in classe Strumento
 
 
 }
