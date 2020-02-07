@@ -24,6 +24,7 @@ public class DisegnoAManoLibera extends StrumentoDiDisegno {
 	}
 		if(stato) {
 			if(e instanceof MouseMove) {
+				this.canvas.addToHistory();
 				move = (MouseMove) e;
 				canvas.modifica(move.posx(), move.posy() , super.getTratto());
 			}
