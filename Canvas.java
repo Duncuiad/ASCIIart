@@ -165,10 +165,10 @@ public class Canvas {
 			int i,j;
 			for(i=0;i<this.R;i++) {
 				for(j=0;j<this.C;j++)
-					if( this.car(i,j) != newCanvas(i,j) )
-						break;
+					if( this.car(i,j) != newCanvas.car(i,j) )
+						return false;
 			}
-			return i==this.R && j==this.C;
+			return true;
 		}
 
 		@Override
