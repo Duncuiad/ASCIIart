@@ -56,6 +56,12 @@ public class Canvas {
 			return '0';
 		}
 	}
+	/**
+	 * Restituisce il carattere corrispondente alla cella (x,y) del canvas
+	 * @param x numero di riga del canvas
+	 * @param y numero di colonna del canvas
+	 * @return il carattere corrispondente all'entrata (x,y)
+	 */
 
 	public boolean vuota(int x, int y) {
 		return this.car(x,y)==' ';
@@ -108,6 +114,11 @@ public class Canvas {
 			}
 		}
 	}
+	/**
+	 * Il canvas torna allo stato in cui si trovava k modifiche fa o allo 
+	 * stato iniziale se ci sono state meno di k modifiche
+	 * @param k
+	 */
 
 	public void undo(int k) {
 		Canvas buffer = this.copia();
@@ -128,6 +139,11 @@ public class Canvas {
 			}
 		}
 	}
+	/**
+	 * Aggiunge in cima alla pila il canvas che esegue il metodo.
+	 * Nel caso in cui non e' ancora stata collegata alcuna pila al canvas 
+	 * che esegue il metodo stampa un messaggio di errore.
+	 */
 
 	public void addToHistory() {
 		Canvas copyOfThisCanvas = this.copia();
