@@ -78,11 +78,11 @@ public class Canvas {
 		return y>= 0 && y<R && x>=0 && x<C;
 	}
 
-	/**
-	 * sostituisce il carattere di canvas conil nuovo carattere c in ingresso se
-	 * le dimensioni sono rispettate
-	 * @param x il numero di riga da modificare
-	 * @param y il numero di colonna da modificare
+	/** Sostituisce il carattere di canvas in (x,y) con il nuovo carattere c in ingresso se
+	 * (x,y) sta all'interno del canvas
+	 * 
+	 * @param x l'ascissa dell'elemento da modificare
+	 * @param y l'ordinata dell'elemento da modificare
 	 * @param c il carattere da mettere nella posizione (x,y)
 	 */
 	public void modifica(int x, int y, char c) {
@@ -90,6 +90,14 @@ public class Canvas {
 			this.caratteri[y][x]= c;
 	}
 
+	/** Traccia un segmento di estremi (x1,y1) e (x2,y2), con il carattere c
+	 * 
+	 * @param x1 ascissa del primo estremo
+	 * @param y1 ordinata del primo estremo
+	 * @param x2 ascissa del secondo estremo
+	 * @param y2 ordinata del secondo estremo
+	 * @param c carattere con cui tracciare il segmento
+	 */
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
 		int l=Math.abs(x1-x2);
 		int h=Math.abs(y1-y2);
@@ -99,9 +107,10 @@ public class Canvas {
 			double yPosition = (double) y0;
 			double angCoeff = ((double) (y2-y1))/(x2-x1); // il coefficiente angolare del segmento
 			for (int i=0; i<l; i++) {
-				this.modifica(x0+i, (int) yPosition, c);
+				this.modifica(x0+i, (int) Math.round(yPosition), c);
 				yPosition += angCoeff; // sottinteso che l'incremento in x sia uguale a 1
 			}
+			this.modifica(x2, y2, c);
 		}
 		else {
 			int y0 = Math.min(y1,y2);
@@ -109,7 +118,7 @@ public class Canvas {
 			double xPosition = (double) x0;
 			double invAngCoeff = ((double) (x2-x1))/(y2-y1); // il reciproco del coefficiente angolare del segmento
 			for (int i=0; i<h; i++) {
-				this.modifica((int) xPosition, y0+i, c);
+				this.modifica((int) Math.round(xPosition), y0+i, c);
 				xPosition += invAngCoeff; // sottinteso che l'incremento in x sia uguale a 1
 			}
 		}
