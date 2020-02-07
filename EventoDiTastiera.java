@@ -25,4 +25,9 @@ public class EventoDiTastiera implements Evento {
 	public char car() {
 		return caratterePremuto;
 	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(this.caratterePremuto);
+	}
 }
