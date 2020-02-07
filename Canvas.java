@@ -9,12 +9,27 @@ public class Canvas {
 	public Canvas(int righe, int colonne) {
 		this.R=righe;
 		this.C=colonne;
-		this.caratteri = new char[R][C];
-		for(int i=0;i<R;i++) {
-			for(int j=0;j<C;j++)
-				caratteri[i][j]=' ';
+		try{
+			this.caratteri = new char[R][C];
+		} catch (NegativeArraySizeException e) {
+			System.err.println("Errore: il canvas non può avere dimensioni negative. "
+			 + "Dati inseriti: R=" + righe + ", C=" + colonne);
 		}
-		this.pila= new Stack<Canvas>();
+		for(int i=0;i<R;i++) {
+			for(int j=0;j<C;j++) {
+				caratteri[i][j]=' ';
+			}
+		}
+		this.pila = null;
+	}
+
+	public Canvas(int righe, int colonne, Stack<Canvas> pila) {
+		this(righe, colonne);
+		this.linkPila(pila);
+	}
+
+	private void linkPila(Stack<Canvas> pila) {
+		this.pila = pila;
 	}
 
 
@@ -26,19 +41,19 @@ public class Canvas {
 		return this.C;
 	}
 
-	public Stack<Canvas> getStack() {
-		return this.pila;
-	}
 	/**
 	 *
 	 * @param x
 	 * @param y
 	 * @return il carattere in posizione (x,y)
 	 */
-
-
 	public char car(int x, int y) {
-		return this.caratteri[x][y];
+		try {return this.caratteri[x][y];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("Errore in canvas " + this.R + "x" + this.C +
+			": non posso accedere al carattere in posizione " + x + ", " + y
+			+ " (Out of bounds)");
+		}
 	}
 
 	public boolean vuota(int x, int y) {
@@ -52,7 +67,7 @@ public class Canvas {
 	 * @return true se e solo se 0<x<R e 0<y<C
 	 */
 
-	public boolean possoModifica(int x, int y) {
+	public boolean inBounds(int x, int y) {
 		return x>= 0 && x<R && y>=0 && y<R;
 	}
 
@@ -64,7 +79,7 @@ public class Canvas {
 	 * @param c il carattere da mettere nella posizione (x,y)
 	 */
 	public void modifica(int x, int y, char c) {
-		if( this.possoModifica(x, y) )
+		if( this.inBounds(x, y) )
 			this.caratteri[x][y]= c;
 	}
 
@@ -98,15 +113,29 @@ public class Canvas {
 		for (int i=0; i<k; i++) {
 			try {
 				buffer=this.pila.pop();
-			} catch(EmptyStackException e) {
+			} catch (EmptyStackException e) {
 				// nulla
 				break; // esce dal for
+			} catch (NullPointerException e) { // se non si è collegata una pila al canvas
+				System.err.println("Errore in canvas " + this.R + "x"
+				+ this.C + ": non ho ancora collegato la storia del canvas");
 			}
 		}
 		for (int i=0; i<this.R; i++) {
 			for (int j=0; j<this.C; j++) {
 				this.modifica(i, j, buffer.car(i, j)); //deep copy
 			}
+		}
+	}
+
+	public void addToHistory() {
+		Canvas copyOfThisCanvas = this.copia();
+		copyOfThisCanvas.linkPila(this.pila);
+		try {
+			this.pila.push(copyOfThisCanvas);
+		} catch (NullPointerException e) {
+			System.err.println("Errore in canvas " + this.R + "x" + this.C
+			+ ": non ho ancora definito a quale storia collegare questo canvas");
 		}
 	}
 
@@ -147,28 +176,29 @@ public class Canvas {
 			}
 			return newCanvas;
 		}
-		
+
+		@Override
 		public boolean equals(Object other) {
 			if(other instanceof Canvas)
 				return equals ((Canvas) other);
 			else
 				return false;
 		}
-		
+
 		public boolean equals(Canvas newCanvas) {
 			if(newCanvas==null)
 				return false;
-			
+
 			if(! (this.R==newCanvas.R && this.C==newCanvas.C ) )
 				return false;
-			
+
 			int i,j;
 			for(i=0;i<this.R;i++) {
 				for(j=0;j<this.C;j++)
-					if( this.car(i,j) != newCanvas.car(i,j) )
-						return false;
+					if( this.car(i,j) != newCanvas(i,j) )
+						break;
 			}
-			return true;
+			return i==this.R && j==this.C;
 		}
 
 		@Override
