@@ -8,7 +8,13 @@ public abstract class StrumentoDiDisegno extends Strumento {
   /** Questo &egrave; il tratto di disegno corrente, comune a tutte le istanze di StrumentoDiDisegno */
   private static char trattoDiDisegno = '*';
   /* protected perché viene usato dalle istanze di ogni sottoclasse concreta */
-
+  
+  //COSTRUTTORI
+  public StrumentoDiDisegno(Canvas canvas) {
+	  super(canvas);
+  }
+  
+  //METODI
   /** Modifica il tratto di disegno
    *
    * @param c Il carattere che si vuole utilizzare

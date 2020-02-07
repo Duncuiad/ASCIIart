@@ -1,6 +1,4 @@
-/*
-
-package it.unimi.di.boldi.mat;
+import java.util.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,17 +25,9 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 
     ////////// PARTE DA MODIFICARE
 	public static void main(String[] args) {
-		canvas = new Canvas(50, 100);
+		canvas = new Canvas(50, 100, new Stack<Canvas>());
 		toolbox = new Toolbox(canvas);
 		toolbox.aggiungi(new Segmento(canvas), 's');
-		toolbox.aggiungi(new Poligonale(canvas), 'p');
-		toolbox.aggiungi(new DisegnoAManoLibera(canvas), 'd');
-		toolbox.aggiungi(new Quadrato(canvas), 'q');
-		toolbox.aggiungi(new Cerchio(canvas), 'c');
-		toolbox.aggiungi(new Cancella(canvas), 'x');
-		toolbox.aggiungi(new Copia(canvas), 'v');
-		toolbox.aggiungi(new FlipHoriz(canvas), 'h');
-		toolbox.aggiungi(new FlipVert(canvas), 'w');
 		toolbox.attiva('s');
 
 		new ASCIIArt(canvas, toolbox);
@@ -226,4 +216,3 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 	}
 
 }
-*/

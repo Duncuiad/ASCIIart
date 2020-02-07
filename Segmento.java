@@ -12,6 +12,11 @@ public class Segmento extends StrumentoDiDisegno {
   /** Controlla se l'inizio del trascinamento &egrave; stato effettuato con il tasto sinistro */
   private boolean isLeftClick;
 
+  //COSTRUTTORI
+  public Segmento(Canvas canvas) {
+    super(canvas);
+  }
+
   //METODI
   /** Si occupa di gestire gli input da mouse
   * @param e evento corrente
@@ -46,6 +51,15 @@ public class Segmento extends StrumentoDiDisegno {
       }
     }
   }
+
+  @Override
+  public boolean equals(Object altro) {
+    if (altro instanceof Segmento) {
+      return true;
+    } else {
+      return false;
+    }
+  } // hashCode overridden in classe Strumento
 
   @Override
   public String toString() {

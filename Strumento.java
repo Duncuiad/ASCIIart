@@ -31,6 +31,11 @@ public abstract class Strumento {
   public abstract void ricevi(EventoDiMouse e);
 
   @Override
+  public int hashCode() {
+    return this.getClass().hashCode();
+  }
+
+  @Override
   public String toString() {
     return "Strumento collegato a canvas " + canvas.hashCode();
   }

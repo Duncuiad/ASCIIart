@@ -3,6 +3,11 @@
  *
  */
 public abstract class StrumentoDiSelezione extends Strumento {
+	
+  //COSTRUTTORI
+  public StrumentoDiSelezione(Canvas canvas) {
+	  super(canvas);
+  }
 
   //METODI
   /** Prototipo del metodo azione(int x1, int y1, int x2, int y2, int x, int y), da ridefinire nelle sottoclassi di StrumentoDiSelezione

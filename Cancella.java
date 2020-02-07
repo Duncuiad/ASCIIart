@@ -1,4 +1,9 @@
 public class Cancella extends StrumentoDiSelezione {
+	
+  //COSTRUTTORI
+  public Cancella(Canvas canvas) {
+	  super(canvas);
+  }
 
   public void ricevi(EventoDiMouse e) {
 

@@ -48,7 +48,7 @@ public class Canvas {
 	 * @return il carattere in posizione (x,y)
 	 */
 	public char car(int x, int y) {
-		try {return this.caratteri[x][y];
+		try {return this.caratteri[y][x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("Errore in canvas " + this.R + "x" + this.C +
 			": non posso accedere al carattere in posizione " + x + ", " + y
@@ -75,7 +75,7 @@ public class Canvas {
 	 */
 
 	public boolean inBounds(int x, int y) {
-		return x>= 0 && x<R && y>=0 && y<R;
+		return y>= 0 && y<R && x>=0 && x<C;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Canvas {
 	 */
 	public void modifica(int x, int y, char c) {
 		if( this.inBounds(x, y) )
-			this.caratteri[x][y]= c;
+			this.caratteri[y][x]= c;
 	}
 
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
@@ -114,14 +114,14 @@ public class Canvas {
 			}
 		}
 	}
+	
 	/**
 	 * Il canvas torna allo stato in cui si trovava k modifiche fa o allo 
 	 * stato iniziale se ci sono state meno di k modifiche
 	 * @param k
 	 */
-
 	public void undo(int k) {
-		Canvas buffer = this.copia();
+		Canvas buffer = new Canvas(this.getR(), this.getC());
 		for (int i=0; i<k; i++) {
 			try {
 				buffer=this.pila.pop();
@@ -133,8 +133,8 @@ public class Canvas {
 				+ this.C + ": non ho ancora collegato la storia del canvas");
 			}
 		}
-		for (int i=0; i<this.R; i++) {
-			for (int j=0; j<this.C; j++) {
+		for (int i=0; i<this.getC(); i++) {
+			for (int j=0; j<this.getR(); j++) {
 				this.modifica(i, j, buffer.car(i, j)); //deep copy
 			}
 		}
@@ -157,11 +157,11 @@ public class Canvas {
 	}
 
 		public Canvas copia() {
-			int r=this.getR();
 			int c=this.getC();
+			int r=this.getR();
 			Canvas newCanvas = new Canvas(r,c);
-			for(int i=0;i<r;i++) {
-				for(int j=0;j<c;j++)
+			for(int i=0;i<c;i++) {
+				for(int j=0;j<r;j++)
 					newCanvas.modifica(i, j, this.car(i,j));
 			}
 			return newCanvas;
@@ -179,15 +179,15 @@ public class Canvas {
 
 		public Canvas copia(int x1,int y1,int x2,int y2) {
 			// ampiezza del rettangolo selezionato
-			int r=Math.abs(x2-x1);
-			int c=Math.abs(y2-y1);
+			int c=Math.abs(x2-x1);
+			int r=Math.abs(y2-y1);
 			// estremo in basso a sinistra del rettangolo selezionato
 			int x0=Math.min(x1, x2);
 			int y0=Math.min(y1,y2);
 			// corpo
 			Canvas newCanvas = new Canvas(r,c);
-			for (int i=0; i<r; i++) {
-				for (int j=0; j<c; j++) {
+			for (int i=0; i<c; i++) {
+				for (int j=0; j<r; j++) {
 					newCanvas.modifica(i, j, this.car(x0+i, y0+j));
 				}
 			}
@@ -197,8 +197,8 @@ public class Canvas {
 		@Override
 		public int hashCode() {
 			int sumEntries=0;
-			for(int i=0;i<this.R;i++) {
-				for(int j=0;j<this.C;j++)
+			for(int i=0;i<this.getC();i++) {
+				for(int j=0;j<this.getR();j++)
 					sumEntries+=this.car(i, j);
 			}
 			return sumEntries;
@@ -220,8 +220,8 @@ public class Canvas {
 				return false;
 
 			int i,j;
-			for(i=0;i<this.R;i++) {
-				for(j=0;j<this.C;j++)
+			for(i=0;i<this.getC();i++) {
+				for(j=0;j<this.getR();j++)
 					if( this.car(i,j) != newCanvas.car(i,j) )
 						return false;
 			}
@@ -231,8 +231,8 @@ public class Canvas {
 		@Override
 		public String toString() {
 			String stringa = "";
-			for (int i=0; i<this.R; i++) {
-				for (int j=0; j<C; j++) {
+			for (int j=this.getR()-1; j>=0; j--) {
+				for (int i=0; i<this.getC(); i++) {
 					stringa += this.car(i, j);
 				}
 				stringa += "\n";
