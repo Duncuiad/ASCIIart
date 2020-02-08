@@ -81,7 +81,6 @@ public class Cerchio extends StrumentoDiDisegno {
 
 	  primoClick = null;
 	  secondoClick = null;
-	  System.err.println("Ho fatto il reset");
   }
 
   @Override

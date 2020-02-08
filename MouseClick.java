@@ -24,6 +24,10 @@ public class MouseClick extends EventoDiMouse {
     this.doubleClick = doubleClick;
   }
   
+  /** Costruisce l'evento copiandone un altro gi&agrave; esistente
+   * 
+   * @param e l'evento MouseClick da copiare
+   */
   public MouseClick(MouseClick e) {
 	  super(e);
 	  this.rightClick = e.rightClick;

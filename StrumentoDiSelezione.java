@@ -48,7 +48,7 @@ public abstract class StrumentoDiSelezione extends Strumento {
 			if (!(actionPoint.rightClick()) && pFinale != null) { //se click sinistro e c'&egrave; un'area selezionata
 				canvas.undo(1); // rimuove il riquadro di selezione
 				canvas.addToHistory();
-				azione(/*pIniziale.posx(),pIniziale.posy(),pFinale.posx(),pFinale.posy(),actionPoint.posx(),actionPoint.posy()*/);
+				azione();
 			}
 			
 			reset();

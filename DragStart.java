@@ -16,6 +16,10 @@ public class DragStart extends EventoDiMouse {
     this.right = right;
   }
   
+  /** Costruisce l'evento copiandone un altro gi&agrave; esistente
+   * 
+   * @param e l'evento DragStart da copiare
+   */
   public DragStart(DragStart e) {
 	  super(e);
 	  this.right = e.right;
@@ -32,7 +36,7 @@ public class DragStart extends EventoDiMouse {
 
   @Override
   public String toString() {
-    return super.toString() + ", di tipo DragStart. " + (right ? "Tasto destro" : "Tasto Sinistro");
+    return super.toString() + ", di tipo DragStart. " + (right() ? "Tasto destro" : "Tasto Sinistro");
   }
 
 }
