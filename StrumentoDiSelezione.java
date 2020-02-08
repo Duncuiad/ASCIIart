@@ -29,6 +29,9 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	public void ricevi(EventoDiMouse e) {
 		
 		if (e instanceof DragStart) {
+			if (pIniziale != null) { // stai facendo un nuovo drag subito dopo un drag precedente
+				canvas.undo(1); // rimuove il riquadro di selezione
+			}
 			pIniziale = (DragStart) e;
 			
 		} else if (e instanceof DragEnd) {
