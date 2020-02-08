@@ -111,6 +111,9 @@ public class Canvas {
 				this.modifica(x0+i, (int) Math.round(yPosition), c);
 				yPosition += angCoeff; // sottinteso che l'incremento in x sia uguale a 1
 			}
+			// accade che con determinati arrotondamenti non stampi uno dei due estremi. 
+			// qui lo rifaccio nel caso in cui sia necessario
+			this.modifica(x1, y1, c);
 			this.modifica(x2, y2, c);
 		}
 		else {
@@ -138,7 +141,7 @@ public class Canvas {
 			} catch (EmptyStackException e) {
 				// nulla
 				break; // esce dal for
-			} catch (NullPointerException e) { // se non si è collegata una pila al canvas
+			} catch (NullPointerException e) { // se non si &egrave; collegata una pila al canvas
 				System.err.println("Errore in canvas " + this.R + "x"
 				+ this.C + ": non ho ancora collegato la storia del canvas");
 			}

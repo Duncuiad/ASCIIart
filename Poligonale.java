@@ -24,7 +24,7 @@ public class Poligonale extends StrumentoDiDisegno {
   @Override
   public void ricevi(EventoDiMouse e) {
 	  if(e instanceof MouseClick) {
-		  if(!start) {	//finché non faccio un click semplice sinisstro entro in questo if  
+		  if(!start) {	//finché non faccio un click semplice sinistro entro in questo if  
 			  primoClick= (MouseClick) e;
 			  
 			  if(!primoClick.rightClick() && !primoClick.doubleClick()) {

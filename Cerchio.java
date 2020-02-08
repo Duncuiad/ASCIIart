@@ -2,9 +2,9 @@ public class Cerchio extends StrumentoDiDisegno {
 
   //ATTRIBUTI
   /** Primo evento da registrare */
-  private MouseClick primoClick = null;
+  private MouseClick primoClick;
   /** Secondo evento da registrare */
-  private MouseClick secondoClick = null;
+  private MouseClick secondoClick;
   /** il carattere presente in precedenza nel centro */
   char precedente;
 
@@ -24,8 +24,9 @@ public class Cerchio extends StrumentoDiDisegno {
 			  primoClick = (MouseClick) e;
 
 			  if ( !(primoClick.rightClick()) ) { // se click sinistro
-			  precedente = canvas.car(primoClick.posx(), primoClick.posy());
-			  canvas.modifica(primoClick.posx(), primoClick.posy(), '*'); // mette l'evidenziatore al centro
+				  canvas.addToHistory();
+				  precedente = canvas.car(primoClick.posx(), primoClick.posy());
+				  canvas.modifica(primoClick.posx(), primoClick.posy(), '*'); // mette l'evidenziatore al centro
 			  } // se click destro, non fa nulla
 
 		  } else { // secondo click
@@ -66,12 +67,21 @@ public class Cerchio extends StrumentoDiDisegno {
 
 			  // fase di cancellatura
 			  // avviene anche se il secondo click &egrave; destro (come voluto)
-			  canvas.modifica(primoClick.posx(), primoClick.posy(), precedente); // toglie l'evidenziatore
-
-			  primoClick = null; // fine
-			  secondoClick = null;
+			  reset();
 		  }
 	  }
+  }
+  
+  protected void reset() {
+	  try{
+		  canvas.modifica(primoClick.posx(), primoClick.posy(), precedente); // toglie l'evidenziatore
+	  } catch (NullPointerException e) {
+		  // non c'&egrave ancora un canvas, non fare nulla
+	  }
+
+	  primoClick = null;
+	  secondoClick = null;
+	  System.err.println("Ho fatto il reset");
   }
 
   @Override

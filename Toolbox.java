@@ -54,7 +54,7 @@ public class Toolbox {
 		  EventoDiTastiera eTast = (EventoDiTastiera) e;
 		  char tastoPremuto = eTast.car();
 		  if (strumenti.containsKey(tastoPremuto)) { // 1.1 se il tasto indica uno strumento nel toolbox
-			  this.attivo = strumenti.get(tastoPremuto); // cambia strumento attivo
+			  this.attiva(tastoPremuto); // cambia strumento attivo
 		  }
 		  else if (tastoPremuto == 'u') { // 1.2 se 'u' non &egrave; nel toolbox
 				  canvas.undo(1); // torna indietro di un'azione
@@ -91,6 +91,11 @@ public class Toolbox {
    */
   public void attiva(char c) {
 	  if (strumenti.containsKey(c)) {
+		  try {
+			  this.attivo.reset(); //prima di tutto resetta lo strumento che sto lasciando
+		  } catch (NullPointerException e) {
+			  //salta il reset
+		  }
 		  this.attivo = strumenti.get(c);
 	  }
   }

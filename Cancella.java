@@ -5,12 +5,17 @@ public class Cancella extends StrumentoDiSelezione {
 	  super(canvas);
   }
 
-  public void ricevi(EventoDiMouse e) {
-
-  }
-
-  public void azione(int x1, int y1, int x2, int y2, int x, int y) {
-
+  public void azione() {
+	  int x0 = Math.min(pIniziale.posx(), pFinale.posx());
+	  int y0 = Math.min(pIniziale.posy(), pFinale.posy());
+	  int l = Math.abs(pIniziale.posx() - pFinale.posx());
+	  int h = Math.abs(pIniziale.posy() - pFinale.posy());
+	  
+	  for (int i = 0; i < l; i++) {
+		  for (int j = 0; j < h; j++) {
+			  canvas.modifica(x0+i, y0+j, ' ');
+		  }
+	  }
   }
 
 }

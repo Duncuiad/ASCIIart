@@ -16,11 +16,13 @@ public class Quadrato extends StrumentoDiDisegno {
   public void ricevi(EventoDiMouse e) {
 
     // caso DragStart
-    if (e instanceof DragStart) {
-    	this.canvas.addToHistory();
-    	this.pIniziale = (DragStart) e;
-    	canvas.modifica(pIniziale.posx(), pIniziale.posy(), super.getTratto()); // evidenzia il punto di partenza
-    }
+	    if (e instanceof DragStart) {
+	    	this.pIniziale = (DragStart) e;
+	    	if (!(this.pIniziale.right())) {
+				this.canvas.addToHistory();
+				canvas.modifica(pIniziale.posx(), pIniziale.posy(), super.getTratto()); // evidenzia il punto di partenza
+	    	}
+	    }
 
     // caso DragEnd
     if (e instanceof DragEnd) {

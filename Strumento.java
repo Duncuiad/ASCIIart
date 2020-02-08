@@ -16,6 +16,7 @@ public abstract class Strumento {
    */
   public Strumento(Canvas canvas) {
     this.canvas = canvas;
+    this.reset();
   }
 
   /** Il costruttore senza parametri inizializza this.canvas a null */
@@ -29,6 +30,8 @@ public abstract class Strumento {
    * @param e l'EventoDiMouse a cui lo Strumento deve rispondere
    */
   public abstract void ricevi(EventoDiMouse e);
+  
+  protected abstract void reset();
 
   @Override
   public int hashCode() {
