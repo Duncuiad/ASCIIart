@@ -18,13 +18,15 @@ public class DisegnoAManoLibera extends StrumentoDiDisegno {
 	//METODI
 	public void ricevi(EventoDiMouse e) {
 		if(e instanceof MouseClick) {
+			if(!stato) {
+				canvas.addToHistory();
+			}
 			click = (MouseClick) e;
 			if(!click.rightClick() && !click.doubleClick())
-				stato = (stato==true) ? true : false;
+			stato=!stato;
 	}
 		if(stato) {
 			if(e instanceof MouseMove) {
-				this.canvas.addToHistory();
 				move = (MouseMove) e;
 				canvas.modifica(move.posx(), move.posy() , super.getTratto());
 			}
