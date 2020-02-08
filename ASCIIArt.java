@@ -31,6 +31,7 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 		toolbox.aggiungi(new Segmento(canvas), 's');
 		toolbox.aggiungi(new Quadrato(canvas), 'q');
 		toolbox.aggiungi(new Cerchio(canvas), 'c');
+		toolbox.aggiungi(new Poligonale(canvas), 'p');
 		toolbox.attiva('s');
 
 		new ASCIIArt(canvas, toolbox);
