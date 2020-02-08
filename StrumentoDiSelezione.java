@@ -52,6 +52,8 @@ public abstract class StrumentoDiSelezione extends Strumento {
 				canvas.undo(1); // rimuove il riquadro di selezione
 				canvas.addToHistory();
 				azione();
+			} else if (actionPoint.rightClick() && pFinale != null) {
+				canvas.undo(1); // rimuove il riquadro di selezione
 			}
 			
 			reset();
