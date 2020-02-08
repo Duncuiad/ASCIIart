@@ -14,7 +14,6 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	//COSTRUTTORI
 	public StrumentoDiSelezione(Canvas canvas) {
 		super(canvas);
-		areaSelezionata = canvas.copia(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy());
 		}
 
 	//METODI
