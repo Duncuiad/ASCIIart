@@ -23,6 +23,5 @@ public class FlipHoriz extends StrumentoDiSelezione {
 			  canvas.modifica(x0-i, y0+j, c);
 			  }
 		  }
-	  canvas.modifica(x0,y0 , 'p');
 	  }
   }
