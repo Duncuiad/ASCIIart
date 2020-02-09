@@ -31,7 +31,7 @@ public abstract class StrumentoDiDisegnoDrag extends StrumentoDiDisegno {
     if (e instanceof DragEnd) {
       if ((this.pIniziale != null) && !(this.pIniziale.right())) {
     	  this.pFinale = (DragEnd) e;
-    	  azione();
+    	  disegna();
         // &egrave; ben posto: DragEnd segue sempre un DragStart, dunque pIniziale non � null
       }
 
@@ -42,7 +42,7 @@ public abstract class StrumentoDiDisegnoDrag extends StrumentoDiDisegno {
     }
   }
 
-  protected abstract void azione();
+  protected abstract void disegna();
 
   @Override
   protected void reset() {

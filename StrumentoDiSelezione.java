@@ -52,9 +52,7 @@ public abstract class StrumentoDiSelezione extends Strumento {
 				canvas.undo(1); // rimuove il riquadro di selezione
 				canvas.addToHistory();
 				azione();
-			} else if (actionPoint.rightClick() && pFinale != null) {
-				canvas.undo(1); // rimuove il riquadro di selezione
-			}
+			} 
 			
 			reset();
 		}
@@ -73,6 +71,11 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	
 	@Override
 	protected void reset() {
+		
+		if (actionPoint == null || (actionPoint != null && actionPoint.rightClick())) {
+			canvas.undo(1); // rimuove il riquadro di selezione
+		}
+		
 		pIniziale = null;
 		pFinale = null;
 		actionPoint = null;

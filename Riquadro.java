@@ -9,7 +9,7 @@ public class Riquadro extends StrumentoDiDisegnoDrag {
     super(canvas);
   }
 
-  protected void azione() {
+  protected void disegna() {
 	  canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pIniziale.posy(), super.getTratto()); // lato orizzontale 1
 	  canvas.modifica(pIniziale.posx(), pFinale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // lato orizzontale 2
 	  canvas.modifica(pIniziale.posx(), pIniziale.posy(), pIniziale.posx(), pFinale.posy(), super.getTratto()); // lato verticale 1

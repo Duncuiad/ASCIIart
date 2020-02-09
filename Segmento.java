@@ -9,7 +9,7 @@ public class Segmento extends StrumentoDiDisegnoDrag {
     super(canvas);
   }
 
-  protected void azione() {
+  protected void disegna() {
         canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // stampa il segmento
   }
 
