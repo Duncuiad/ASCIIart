@@ -1,10 +1,10 @@
 public class Poligonale extends StrumentoDiDisegno {
 	
 	//ATTRIBUTI
-	/** Primo evento da registrare*/
+	/** Primo evento da registrare. Una volta che &egrave; stato segnato il primo punto, contiene il primo estremo del segmento corrente */
 	private MouseClick primoClick = null;
 	
-	/** Secondo evento da registrare */
+	/** Secondo evento da registrare. Una volta che &egrave; stato segnato il primo punto, contiene il secondo estremo del segmento corrente */
 	private MouseClick secondoClick = null;
 	
 	/** true se si e' effettuato un primoClick */
@@ -23,40 +23,48 @@ public class Poligonale extends StrumentoDiDisegno {
   
   @Override
   public void ricevi(EventoDiMouse e) {
-	  if(e instanceof MouseClick) {
+	  
+	  if (e instanceof MouseClick) {
+		  
 		  if(!start) {	//finché non faccio un click semplice sinistro entro in questo if  
 			  primoClick= (MouseClick) e;
 			  
 			  if(!primoClick.rightClick() && !primoClick.doubleClick()) {
-				  start=true;
+				  start = true;
 				  x0 = primoClick.posx();
 				  y0 = primoClick.posy();
+				  canvas.addToHistory();
+				  canvas.modifica(x0, y0, super.getTratto());
 			  }
-	  }else {
+			  
+		  } else {
 			  secondoClick = (MouseClick) e;
-			  //traccio un segmento tra primoClick e secondoClick e ogni volta copio l'informazione di secondoClick in primoClick
+			  
 			  if(!secondoClick.rightClick() && !secondoClick.doubleClick()) {
+				  //traccio un segmento tra primoClick e secondoClick e ogni volta copio l'informazione di secondoClick in primoClick
 				  canvas.modifica(primoClick.posx(), primoClick.posy(), secondoClick.posx(), secondoClick.posy(), super.getTratto());
 				  primoClick=secondoClick;
-				  }
-			  //termino la poligonale corrente unendo secondoClick con il punto iniziale di coordinate(x0,y0)
-			  else if(!secondoClick.rightClick() && secondoClick.doubleClick()) { 
-				  canvas.modifica(x0, y0, secondoClick.posx(), secondoClick.posy(), super.getTratto());
+			  } else if(!secondoClick.rightClick() && secondoClick.doubleClick()) {  
+				  //termino la poligonale corrente unendo il punto del doppio click con il punto iniziale di coordinate (x0,y0)
+				  canvas.modifica(x0, y0, secondoClick.posx(), primoClick.posy(), super.getTratto());
 				  start = false;
+			  } else if(secondoClick.rightClick()) { 
+				  reset(); // lascio disegnata la poligonale fino a questo punto
 			  }
-			  //resetto lo stato dello strumento
-			  else if(secondoClick.rightClick()) {
-			  start=false;
-			  primoClick = null;
-			  secondoClick = null;
-			  x0=-1;
-			  y0=-1;
-			  }
-	  	}
+		  }
 	  }
   }
 
 
+@Override
+protected void reset() {
+	start=false;
+	primoClick = null;
+	secondoClick = null;
+	x0=-1;
+	y0=-1;
+}
+  
 @Override
 public boolean equals(Object altro) {
   if (altro instanceof Poligonale) {
