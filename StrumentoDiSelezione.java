@@ -71,8 +71,10 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	@Override
 	protected void reset() {
 		
-		if (actionPoint == null || (actionPoint != null && actionPoint.rightClick())) {
-			canvas.undo(1); // rimuove il riquadro di selezione
+		if ( areaSelezionata != null) {
+			if ( actionPoint == null || (actionPoint != null && actionPoint.rightClick()) ) {
+				canvas.undo(1); // rimuove il riquadro di selezione
+			}
 		}
 		
 		pIniziale = null;

@@ -2,4 +2,5 @@
 .project
 *.class
 *.html
+*.txt
 local_*
