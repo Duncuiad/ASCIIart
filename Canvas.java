@@ -116,16 +116,20 @@ public class Canvas {
 	 * @param k
 	 */
 	public void undo(int k) {
-		Frame buffer;
 		for (int i=0; i<k; i++) {
 			try {
-				buffer=this.pila.pop();
+				this.pila.pop();
 			} catch (EmptyStackException e) {
-				this.pila.push(new Frame(this.getR(), this.getC())); //non c'è pi&ugrave;, riprendi dal frame vuoto
-				break; // esce dal ciclo for
+				break; // esce dal ciclo for se ho tolto tutti i frame
 			}
 		}
-		corrente = pila.peek();
+		
+		if (this.pila.empty()) { // nel caso in cui la pila sia rimasta vuota
+			this.pila.push(new Frame(this.getR(), this.getC()));		
+		}
+		
+		corrente = pila.peek();	
+
 	}
 	/**
 	 * Aggiunge in cima alla pila il canvas che esegue il metodo.
