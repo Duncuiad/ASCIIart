@@ -66,8 +66,11 @@ public abstract class StrumentoDiDisegnoCentro extends StrumentoDiDisegno {
 	protected void reset() {
 		  
 		try{
-			if (altro != null && altro.rightClick()) {
-				canvas.undo(1); // annulla l'evidenziatore
+			if ((centro != null && altro == null) || (altro != null && altro.rightClick())) { // lazy evaluation
+				// nel primo caso, ho preso il centro ma non ho ancora preso l'altro punto
+				// avviene per esempio quando cambio strumento dopo aver preso soltanto il centro
+				// nel secondo caso, ho preso il centro ma dopo ho cliccato il tasto destro del mouse
+				canvas.undo(1); // togli l'evidenziatore
 			}
 		} catch (NullPointerException e) {
 			// non c'&egrave ancora un canvas, non fare nulla
