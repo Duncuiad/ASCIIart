@@ -4,35 +4,17 @@ public class Canvas {
 
 	private int R;
 	private int C;
-	private char[][] caratteri;
-	private Stack<Canvas> pila;
+	private Frame corrente;
+	private Stack<Frame> pila;
 
 	public Canvas(int righe, int colonne) {
 		this.R=righe;
 		this.C=colonne;
-		try{
-			this.caratteri = new char[R][C];
-		} catch (NegativeArraySizeException e) {
-			System.err.println("Errore: il canvas non può avere dimensioni negative. "
-			 + "Dati inseriti: R=" + righe + ", C=" + colonne);
-		}
-		for(int i=0;i<R;i++) {
-			for(int j=0;j<C;j++) {
-				caratteri[i][j]=' ';
-			}
-		}
-		this.pila = null;
+		Frame nuovoFrame = new Frame(righe, colonne);
+		this.pila = new Stack<Frame>();
+		pila.push(nuovoFrame);
+		corrente = pila.peek();
 	}
-
-	public Canvas(int righe, int colonne, Stack<Canvas> pila) {
-		this(righe, colonne);
-		this.linkPila(pila);
-	}
-
-	private void linkPila(Stack<Canvas> pila) {
-		this.pila = pila;
-	}
-
 
 	public int getR() {
 		return this.R;
@@ -49,7 +31,7 @@ public class Canvas {
 	 * @return il carattere in posizione (x,y)
 	 */
 	public char car(int x, int y) {
-		try {return this.caratteri[y][x];
+		try {return this.corrente.caratteri[y][x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("Errore in canvas " + this.R + "x" + this.C +
 			": non posso accedere al carattere in posizione " + x + ", " + y
@@ -88,7 +70,7 @@ public class Canvas {
 	 */
 	public void modifica(int x, int y, char c) {
 		if( this.inBounds(x, y) )
-			this.caratteri[y][x]= c;
+			this.corrente.caratteri[y][x]= c;
 	}
 
 	/** Traccia un segmento di estremi (x1,y1) e (x2,y2), con il carattere c
@@ -134,23 +116,16 @@ public class Canvas {
 	 * @param k
 	 */
 	public void undo(int k) {
-		Canvas buffer = new Canvas(this.getR(), this.getC());
+		Frame buffer;
 		for (int i=0; i<k; i++) {
 			try {
 				buffer=this.pila.pop();
 			} catch (EmptyStackException e) {
-				// nulla
-				break; // esce dal for
-			} catch (NullPointerException e) { // se non si &egrave; collegata una pila al canvas
-				System.err.println("Errore in canvas " + this.R + "x"
-				+ this.C + ": non ho ancora collegato la storia del canvas");
+				this.pila.push(new Frame(this.getR(), this.getC())); //non c'� pi&ugrave;, riprendi dal frame vuoto
+				break; // esce dal ciclo for
 			}
 		}
-		for (int i=0; i<this.getC(); i++) {
-			for (int j=0; j<this.getR(); j++) {
-				this.modifica(i, j, buffer.car(i, j)); //deep copy
-			}
-		}
+		corrente = pila.peek();
 	}
 	/**
 	 * Aggiunge in cima alla pila il canvas che esegue il metodo.
@@ -159,14 +134,10 @@ public class Canvas {
 	 */
 
 	public void addToHistory() {
-		Canvas copyOfThisCanvas = this.copia();
-		copyOfThisCanvas.linkPila(this.pila);
-		try {
-			this.pila.push(copyOfThisCanvas);
-		} catch (NullPointerException e) {
-			System.err.println("Errore in canvas " + this.R + "x" + this.C
-			+ ": non ho ancora definito a quale storia collegare questo canvas");
-		}
+		Frame copyOfCurrentFrame = new Frame(this.corrente); // fa una copia del frame corrente
+		this.pila.push(copyOfCurrentFrame); // pila non &egrave; mai null perch&eacute; inizializzata sia dal costruttore,
+											// sia da undo nel caso in cui rimanga vuota
+		corrente = pila.peek();
 	}
 
 		public Canvas copia() {
@@ -251,6 +222,49 @@ public class Canvas {
 				stringa += "\n";
 			}
 			return stringa;
+		}
+		
+		// CLASSE PRIVATA FRAME
+		private class Frame {
+			
+			//ATTRIBUTI
+			int righe;
+			int colonne;
+			public char[][] caratteri;
+			
+			//COSTRUTTORI
+			public Frame(int righe, int colonne) {
+				
+				this.righe = righe;
+				this.colonne = colonne;
+				try{
+					this.caratteri = new char[righe][colonne];
+				} catch (NegativeArraySizeException e) {
+					System.err.println("Errore: il canvas non può avere dimensioni negative. "
+					 + "Dati inseriti: R=" + righe + ", C=" + colonne);
+				}
+				for(int i=0;i<righe;i++) {
+					for(int j=0;j<colonne;j++) {
+						caratteri[i][j]=' ';
+					}
+				}
+			}
+			
+			public Frame(Frame altro) {
+				this.righe = altro.righe;
+				this.colonne = altro.colonne;
+				try{
+					this.caratteri = new char[righe][colonne];
+				} catch (NegativeArraySizeException e) {
+					System.err.println("Errore: il canvas non può avere dimensioni negative. "
+					 + "Dati inseriti: R=" + righe + ", C=" + colonne);
+				}
+				for(int i=0;i<righe;i++) {
+					for(int j=0;j<colonne;j++) {
+						this.caratteri[i][j]=altro.caratteri[i][j];
+					}
+				}
+			}
 		}
 
 

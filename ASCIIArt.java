@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -26,7 +24,7 @@ public class ASCIIArt extends JFrame implements MouseListener, WindowListener, K
 
     ////////// PARTE DA MODIFICARE
 	public static void main(String[] args) {
-		canvas = new Canvas(50, 200, new Stack<Canvas>());
+		canvas = new Canvas(50, 200);
 		toolbox = new Toolbox(canvas);
 		toolbox.aggiungi(new Segmento(canvas), 's');
 		toolbox.aggiungi(new Riquadro(canvas), 'r');
