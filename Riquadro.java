@@ -4,30 +4,27 @@
  */
 public class Riquadro extends StrumentoDiDisegnoDrag {
 
-  //COSTRUTTORI
-  public Riquadro(Canvas canvas) {
-    super(canvas);
-  }
+	//COSTRUTTORI
+	/** Costruisce lo strumento Riquadro associandolo a un canvas
+	 * 
+	 * @param canvas il canvas da associare
+	 */
+	public Riquadro(Canvas canvas) {
+		super(canvas);
+	}
 
-  protected void disegna() {
-	  canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pIniziale.posy(), super.getTratto()); // lato orizzontale 1
-	  canvas.modifica(pIniziale.posx(), pFinale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // lato orizzontale 2
-	  canvas.modifica(pIniziale.posx(), pIniziale.posy(), pIniziale.posx(), pFinale.posy(), super.getTratto()); // lato verticale 1
-	  canvas.modifica(pFinale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), super.getTratto()); // lato verticale 2
-  }
+	//METODI
+	@Override
+	protected void disegna(DragStart pIniziale, DragEnd pFinale) {
+		canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pIniziale.posy(), StrumentoDiDisegno.getTratto()); // lato orizzontale 1
+		canvas.modifica(pIniziale.posx(), pFinale.posy(), pFinale.posx(), pFinale.posy(), StrumentoDiDisegno.getTratto()); // lato orizzontale 2
+		canvas.modifica(pIniziale.posx(), pIniziale.posy(), pIniziale.posx(), pFinale.posy(), StrumentoDiDisegno.getTratto()); // lato verticale 1
+		canvas.modifica(pFinale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), StrumentoDiDisegno.getTratto()); // lato verticale 2
+	}
 
-  @Override
-  public boolean equals(Object altro) {
-    if (altro instanceof Riquadro) {
-      return true;
-    } else {
-      return false;
-    }
-  } // hashCode overridden in classe Strumento
-
-  @Override
-  public String toString() {
-    return "Riquadro: " + super.toString();
-  }
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + ": " + super.toString();
+	}
 
 }

@@ -1,31 +1,36 @@
-/** Le sottoclassi di questa classe astratta implementano strumenti di selezione
+/** Le sottoclassi di questa classe astratta implementano strumenti che selezionano e agiscono su un'area del canvas
  *
  *
  */
 public abstract class StrumentoDiSelezione extends Strumento {
+	
 	//ATTRIBUTI
+	
 	/** Primo evento da registrare */
 	protected DragStart pIniziale = null;
+	
 	/** Secondo evento da registrare */
 	protected DragEnd pFinale = null;
+	
 	/** Action point */
 	protected MouseClick actionPoint = null;
+	
 	/** Il rettangolo di canvas individuato dai due punti di inizio e fine di drag*/
 	protected Canvas areaSelezionata = null;
+	
 	/** Il tratto del riquadro di selezione */
-	protected final char trattoSelezione = '.';
+	private final char trattoSelezione = '.';
+	
 	//COSTRUTTORI
+	/** @see Strumento#Strumento(Canvas)
+	*/
 	public StrumentoDiSelezione(Canvas canvas) {
 		super(canvas);
 	}
 
 	//METODI
 	
-	/** Riceve un evento di mouse e costruisce l'area di selezione per trascinamento. Dopodich&egrave; agisce su tale area
-	 * secondo il contratto della sottoclasse che chiama il metodo
-	 * 
-	 * @param e l'evento di mouse a cui rispondere
-	 */
+	@Override
 	public void ricevi(EventoDiMouse e) {
 		
 		if (e instanceof DragStart) {
@@ -58,14 +63,8 @@ public abstract class StrumentoDiSelezione extends Strumento {
 		}
 	}
 	
-	/** Prototipo del metodo azione(int x1, int y1, int x2, int y2, int x, int y), da ridefinire nelle sottoclassi di StrumentoDiSelezione
+	/** Applica una trasformazione all'area selezionata
 	 * 
-	 * @param x1 ascissa del primo estremo
-	 * @param y1 ordinata del primo estremo
-	 * @param x2 ascissa del secondo estremo
-	 * @param y2 ordinata del secondo estremo
-	 * @param x ascissa dell'action point
-	 * @param y ordinata dell'action point
 	 */
 	public abstract void azione();
 	

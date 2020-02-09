@@ -1,22 +1,29 @@
-
+/** Uno StrumentoDiDisegnoLibero traccia una figura seguendo i movimenti del mouse. Viene attivato e disattivato da un click col tasto sinistro del mouse
+ * 
+ * 
+ *
+ */
 public abstract class StrumentoDiDisegnoLibero extends StrumentoDiDisegno {
 	
 	//ATTRIBUTI
-	/**true se il disegno a mano libera e' in modalita' attiva*/
+	/** true se il disegno a mano libera &egrave; in modalita' attiva */
 	private boolean stato = false;
 	
-	/**click di mouse che puo' far cambiare lo stato se e' semplice e corrispondente
-	 * al tasto sinistro*/
+	/** Click col mouse */
 	private MouseClick click = null;
 	
-	protected MouseMove move = null;
+	/** Movimento del mouse */
+	private MouseMove move = null;
 	
 	//COSTRUTTORI
+	/** @see Strumento#Strumento(Canvas)
+	*/
 	public StrumentoDiDisegnoLibero(Canvas canvas) {
 		super(canvas);
 	}
 
 	//METODI
+	@Override
 	public void ricevi(EventoDiMouse e) {
 		if(e instanceof MouseClick) {
 			if(!stato) {
@@ -29,21 +36,28 @@ public abstract class StrumentoDiDisegnoLibero extends StrumentoDiDisegno {
 		if(stato) {
 			if(e instanceof MouseMove) {
 				move = (MouseMove) e;
-				disegna();
+				disegna(move);
 			}
 		}
 
 	}
 	
-	protected abstract void disegna();
+	/** Disegna una linea continua seguendo il movimento del mouse
+	 * 
+	 * @param move il punto su cui si trova attualmente il mouse
+	 */
+	protected abstract void disegna(MouseMove move);
 	
 	@Override
-	public boolean equals(Object altro) {
-		if (altro instanceof StrumentoDiDisegnoLibero)
-			return true;
-		else
-	    	return false;
-	    
+	protected void reset() {
+		stato = false;
+		click = null;
+		move = null;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ", con input di tipo disegno libero";
 	}
 	
 }

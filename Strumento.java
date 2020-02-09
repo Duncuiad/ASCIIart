@@ -1,18 +1,18 @@
-/** Questa classe astratta &egrave; la superclasse (diretta o indiretta) di tutti gli strumenti
+/** Questa classe astratta &egrave; la superclasse indiretta di tutti gli strumenti
  *
  *
  */
 public abstract class Strumento {
 
   //ATTRIBUTI
-  /** Questo &egrave; il riferimento al canvas su cui opera uno Strumento */
+  /** Il canvas su cui opera lo strumento */
   protected Canvas canvas;
   /* protected perché viene usato dalle istanze di ogni sottoclasse concreta */
 
   //COSTRUTTORI
   /** Associa allo Strumento il canvas su cui agire
    *
-   * @param canvas riferimento al canvas su cui operare
+   * @param canvas canvas su cui operare
    */
   public Strumento(Canvas canvas) {
     this.canvas = canvas;

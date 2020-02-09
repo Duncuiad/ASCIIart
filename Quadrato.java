@@ -1,12 +1,20 @@
-
+/** Disegna un quadrato centrato nel primo click e passante per il secondo click
+ * 
+ *
+ *
+ */
 public class Quadrato extends StrumentoDiDisegnoCentro {
 
+	//COSTRUTTORI
+	/** @see Strumento#Strumento(Canvas)
+	*/
 	public Quadrato(Canvas canvas) {
 		super(canvas);
 	}
 
+	//METODI
 	@Override
-	protected void disegna() {
+	protected void disegna(MouseClick centro, MouseClick altro) {
 		
 		  int semiLato = Math.max(Math.abs(centro.posx() - altro.posx()), Math.abs(centro.posy() - altro.posy()));
 		  
@@ -21,4 +29,9 @@ public class Quadrato extends StrumentoDiDisegnoCentro {
 		  canvas.modifica(xMax, yMin, xMax, yMax, StrumentoDiDisegno.getTratto()); //lato verticale destro
 	}
 
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + ": " + super.toString();
+	}
+	
 }

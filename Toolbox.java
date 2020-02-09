@@ -8,10 +8,13 @@ import java.util.HashMap;
 public class Toolbox {
 
   //ATTRIBUTI
+	
   /** Il canvas su cui agiscono gli strumenti della toolbox */
   private Canvas canvas;
+  
   /** Il dizionario che associa a ogni etichetta uno strumento */
   private HashMap<Character,Strumento> strumenti = null;
+  
   /** Lo strumento attualmente selezionato */
   private Strumento attivo = null;
 
@@ -41,6 +44,7 @@ public class Toolbox {
   }
 
   /** Riceve un evento e agisce di conseguenza
+   * 
    * 1. se l'evento &egrave; di tastiera (&egrave; un carattere):
    * 	1.1 se il tasto premuto identifica uno strumento, cambia lo strumento
    * 	1.2 se invece non identifica uno strumento ma si &egrave; premuto il tasto "u", annulla l'ultima azione sul canvas
