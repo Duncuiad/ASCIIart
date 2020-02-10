@@ -2,11 +2,11 @@
  *
  *
  */
-public class Riquadro extends StrumentoDiDisegnoDrag {
+public final class Riquadro extends StrumentoDiDisegnoDrag {
 
 	//COSTRUTTORI
 	/** Costruisce lo strumento Riquadro associandolo a un canvas
-	 * 
+	 *
 	 * @param canvas il canvas da associare
 	 */
 	public Riquadro(Canvas canvas) {

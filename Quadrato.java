@@ -3,7 +3,7 @@
  *
  *
  */
-public class Quadrato extends StrumentoDiDisegnoCentro {
+public final class Quadrato extends StrumentoDiDisegnoCentro {
 
 	//COSTRUTTORI
 	/** @see Strumento#Strumento(Canvas)

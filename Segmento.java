@@ -2,7 +2,7 @@
  *
  *
  */
-public class Segmento extends StrumentoDiDisegnoDrag {
+public final class Segmento extends StrumentoDiDisegnoDrag {
 
 	//COSTRUTTORI
 	/** @see Strumento#Strumento(Canvas)
@@ -10,13 +10,13 @@ public class Segmento extends StrumentoDiDisegnoDrag {
 	public Segmento(Canvas canvas) {
 	  super(canvas);
 	}
-	
+
 	//METODI
 	@Override
 	protected void disegna(DragStart pIniziale, DragEnd pFinale) {
 	      canvas.modifica(pIniziale.posx(), pIniziale.posy(), pFinale.posx(), pFinale.posy(), StrumentoDiDisegno.getTratto()); // stampa il segmento
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + ": " + super.toString();

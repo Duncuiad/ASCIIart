@@ -42,7 +42,7 @@ public abstract class StrumentoDiDisegnoCentro extends StrumentoDiDisegno {
 				if ( !(centro.rightClick()) ) { // se click sinistro
 					canvas.addToHistory();
 					//precedente = canvas.car(centro.posx(), centro.posy());
-					canvas.modifica(centro.posx(), centro.posy(), StrumentoDiDisegno.evidenziatore); // mette l'evidenziatore al centro
+					canvas.modifica(centro.posx(), centro.posy(), StrumentoDiDisegno.EVIDENZIATORE); // mette l'evidenziatore al centro
 				} else {
 					reset(); // se click destro, non fa nulla e torna allo stato iniziale
 				}
