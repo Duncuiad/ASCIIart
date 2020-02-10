@@ -115,10 +115,6 @@ public class Canvas {
 				this.modifica(x0+i, (int) Math.round(yPosition), c);
 				yPosition += angCoeff; // sottinteso che l'incremento in x sia uguale a 1
 			}
-			// accade che con determinati arrotondamenti non stampi uno dei due estremi. 
-			// qui lo rifaccio nel caso in cui sia necessario
-			this.modifica(x1, y1, c);
-			this.modifica(x2, y2, c);
 		}
 		else {
 			int y0 = Math.min(y1,y2);
@@ -127,9 +123,13 @@ public class Canvas {
 			double invAngCoeff = ((double) (x2-x1))/(y2-y1); // il reciproco del coefficiente angolare del segmento
 			for (int i=0; i<h; i++) {
 				this.modifica((int) Math.round(xPosition), y0+i, c);
-				xPosition += invAngCoeff; // sottinteso che l'incremento in x sia uguale a 1
+				xPosition += invAngCoeff; // sottinteso che l'incremento in y sia uguale a 1
 			}
 		}
+		// accade che con determinati arrotondamenti non stampi uno dei due estremi. 
+		// qui lo rifaccio nel caso in cui sia necessario
+		this.modifica(x1, y1, c);
+		this.modifica(x2, y2, c);
 	}
 	
 	/** Ripristina il canvas allo stato in cui si trovava prima delle ultime k modifiche.
