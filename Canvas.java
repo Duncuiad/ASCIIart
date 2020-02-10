@@ -43,13 +43,14 @@ public class Canvas {
 	public int getC() {
 		return this.C;
 	}
-
+	
 	/**
-	 *
-	 * @param x
-	 * @param y
-	 * @return il carattere in posizione (x,y)
+	 * Restituisce il carattere corrispondente alla cella (x,y) del canvas
+	 * @param x numero di riga del canvas
+	 * @param y numero di colonna del canvas
+	 * @return il carattere corrispondente all'entrata (x,y)
 	 */
+
 	public char car(int x, int y) {
 		try {return this.corrente.caratteri[y][x];
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -60,10 +61,11 @@ public class Canvas {
 		}
 	}
 	/**
-	 * Restituisce il carattere corrispondente alla cella (x,y) del canvas
+	 * 
 	 * @param x numero di riga del canvas
 	 * @param y numero di colonna del canvas
-	 * @return il carattere corrispondente all'entrata (x,y)
+	 * @return true se e solo se il carattere corrispondente all'entrata (x,y) &grave; vuoto
+	 * (cio&grave; contiene il carattere spazio)
 	 */
 
 	public boolean vuota(int x, int y) {
