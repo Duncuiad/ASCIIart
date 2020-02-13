@@ -19,8 +19,7 @@ public final class Poligonale extends StrumentoDiDisegno {
 	private int x0=-1; //inizializzazione con un valore impossibile di ascissa
 
 	/**L'ordinata del punto iniziale della poligonale**/
-	private int y0=-1;//inizializzazione con un valore impossibile di ascissa
-
+	private int y0=-1;//inizializzazione con un valore impossibile di ordinata
 	//COSTRUTTORI
 	/** @see Strumento#Strumento(Canvas)
 	*/
@@ -34,7 +33,7 @@ public final class Poligonale extends StrumentoDiDisegno {
 
 		if (e instanceof MouseClick) {
 
-			if(!start) {	//finch� non faccio un click semplice sinistro entro in questo if
+			if(!start) {	//finch&grave; non faccio un click semplice sinistro entro in questo if
 				primoClick= (MouseClick) e;
 
 				if(!primoClick.rightClick() && !primoClick.doubleClick()) {
