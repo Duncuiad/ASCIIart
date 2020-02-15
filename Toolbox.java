@@ -61,7 +61,7 @@ public class Toolbox {
 			  this.attiva(tastoPremuto); // cambia strumento attivo
 		  } else if (tastoPremuto == 'u') { // 1.2 se 'u' non &egrave; nel toolbox
 				  canvas.undo(1); // torna indietro di un'azione
-		  } else if (this.attivo instanceof StrumentoDiDisegno) { // 1.3 se lo strumento attivo � di disegno
+		  } else if (this.attivo instanceof StrumentoDiDisegno) { // 1.3 se lo strumento attivo &egrave; di disegno
 					  StrumentoDiDisegno.setTratto(tastoPremuto); // cambia il tratto
 		  }
 	  }
