@@ -15,7 +15,7 @@ public class FlipVert extends StrumentoDiSelezione {
 	//METODI
 	
 	@Override
-	public void azione() {	  
+	public void azione(DragStart pIniziale, DragEnd pFinale, MouseClick actionPoint) {	  
 	int l = Math.abs(pIniziale.posx() - pFinale.posx()); //larghezza
 	int h = (int) Math.round(Math.abs(pIniziale.posy() - pFinale.posy()) / 2.0); //altezza partendo dall'asse di simmetria
 	  

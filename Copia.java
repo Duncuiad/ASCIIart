@@ -15,7 +15,7 @@ public class Copia extends StrumentoDiSelezione {
 	//METODI
 	  
 	@Override
-	public void azione() {
+	public void azione(DragStart pIniziale, DragEnd pFinale, MouseClick actionPoint) {
 		  
 		int l = Math.abs(pIniziale.posx() - pFinale.posx());
 		int h = Math.abs(pIniziale.posy() - pFinale.posy());

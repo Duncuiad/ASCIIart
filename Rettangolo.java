@@ -1,15 +1,15 @@
-/** Disegna un riquadro trascinando il mouse tra due punti del canvas
+/** Disegna un rettangolo trascinando il mouse tra due punti del canvas
  *
  *
  */
-public final class Riquadro extends StrumentoDiDisegnoDrag {
+public final class Rettangolo extends StrumentoDiDisegnoDrag {
 
 	//COSTRUTTORI
-	/** Costruisce lo strumento Riquadro associandolo a un canvas
+	/** Costruisce lo strumento Rettangolo associandolo a un canvas
 	 *
 	 * @param canvas il canvas da associare
 	 */
-	public Riquadro(Canvas canvas) {
+	public Rettangolo(Canvas canvas) {
 		super(canvas);
 	}
 
