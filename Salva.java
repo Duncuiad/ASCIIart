@@ -3,7 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.File;
 
-/** Salva la schermata corrente in un file di nome AsciiArt_XX.txt. Attivato da un click del mouse
+/** Salva la schermata corrente in un file di nome AsciiArt (X).txt. Attivato da un click del mouse
  * Sovrascrive il file precedente se click destro
  * Scrive su un altro file se click sinistro
  *
