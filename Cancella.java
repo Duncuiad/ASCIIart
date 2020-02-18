@@ -13,7 +13,7 @@ public class Cancella extends StrumentoDiSelezione {
 	}
 	
 	@Override
-	public void azione() {
+	public void azione(DragStart pIniziale, DragEnd pFinale, MouseClick actionPoint) {
 		int x0 = Math.min(pIniziale.posx(), pFinale.posx());
 		int y0 = Math.min(pIniziale.posy(), pFinale.posy());
 		int l = Math.abs(pIniziale.posx() - pFinale.posx());

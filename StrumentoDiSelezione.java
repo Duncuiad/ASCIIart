@@ -7,13 +7,13 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	//ATTRIBUTI
 
 	/** Primo evento da registrare */
-	protected DragStart pIniziale = null;
+	private DragStart pIniziale = null;
 
 	/** Secondo evento da registrare */
-	protected DragEnd pFinale = null;
+	private DragEnd pFinale = null;
 
 	/** Action point */
-	protected MouseClick actionPoint = null;
+	private MouseClick actionPoint = null;
 
 	/** Il rettangolo di canvas individuato dai due punti di inizio e fine di drag*/
 	protected Canvas areaSelezionata = null;
@@ -56,7 +56,7 @@ public abstract class StrumentoDiSelezione extends Strumento {
 			if (!(actionPoint.rightClick()) && pFinale != null) { //se click sinistro e c'&egrave; un'area selezionata
 				canvas.undo(1); // rimuove il riquadro di selezione
 				canvas.addToHistory();
-				azione();
+				azione(pIniziale, pFinale, actionPoint);
 			}
 
 			reset();
@@ -66,7 +66,7 @@ public abstract class StrumentoDiSelezione extends Strumento {
 	/** Applica una trasformazione all'area selezionata
 	 *
 	 */
-	public abstract void azione();
+	public abstract void azione(DragStart pIniziale, DragEnd pFinale, MouseClick actionPoint);
 
 	@Override
 	protected void reset() {

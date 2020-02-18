@@ -16,7 +16,7 @@ public class FlipHoriz extends StrumentoDiSelezione {
 	//METODI
 	
 	@Override
-	public void azione() {
+	public void azione(DragStart pIniziale, DragEnd pFinale, MouseClick actionPoint) {
 		int l = (int) Math.round( Math.abs(pIniziale.posx() - pFinale.posx()) / 2.0); //larghezza partendo dall'asse di simmetria
 		int h = Math.abs(pIniziale.posy() - pFinale.posy());
 		
