@@ -1,3 +1,8 @@
+/** Riflette orizzontalmente l'area selezionata
+ * 
+ *
+ *
+ */
 public class FlipHoriz extends StrumentoDiSelezione {
 	
 	//COSTRUTTORI
@@ -27,6 +32,11 @@ public class FlipHoriz extends StrumentoDiSelezione {
 				canvas.modifica(x0-i, y0+j, c);
 			}
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + ": " + super.toString();
 	}
 	
 }
