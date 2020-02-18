@@ -2,28 +2,28 @@ import java.util.Stack;
 import java.util.EmptyStackException;
 
 /** Un canvas &egrave una griglia di caratteri su cui possono agire determinati strumenti
- * 
- * 
+ *
+ *
  *
  */
 public class Canvas {
 
 	/** Il numero di righe del canvas */
 	private int R;
-	
+
 	/** Il numero di colonne del canvas */
 	private int C;
-	
+
 	/** La griglia allo stato attuale */
 	private Frame corrente;
-	
+
 	/** Il registro delle griglie precedenti. La griglia attuale &egrave; in cima a tale registro */
 	private Stack<Frame> registroFrame;
 
-	
+
 	//COSTRUTTORI
 	/** Costruisce un canvas date le dimensioni desiderate e ne inizializza il registro
-	 * 
+	 *
 	 * @param righe il numero di righe del nuovo canvas
 	 * @param colonne il numero di colonne del nuovo canvas
 	 */
@@ -43,7 +43,7 @@ public class Canvas {
 	public int getC() {
 		return this.C;
 	}
-	
+
 	/**
 	 * Restituisce il carattere corrispondente alla cella (x,y) del canvas
 	 * @param x numero di riga del canvas
@@ -53,6 +53,9 @@ public class Canvas {
 
 	public char car(int x, int y) {
 		try {return this.corrente.caratteri[y][x];
+			/* La matrice &egrave; memorizzata in formato righe x colonne,
+			 * dove il numero di riga d&agrave; l'ordinata, etc.
+			 */
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("Errore in canvas " + this.R + "x" + this.C +
 			": non posso accedere al carattere in posizione " + x + ", " + y
@@ -61,7 +64,7 @@ public class Canvas {
 		}
 	}
 	/**
-	 * 
+	 *
 	 * @param x numero di riga del canvas
 	 * @param y numero di colonna del canvas
 	 * @return true se e solo se il carattere corrispondente all'entrata (x,y) &grave; vuoto
@@ -85,7 +88,7 @@ public class Canvas {
 
 	/** Sostituisce il carattere di canvas in (x,y) con il nuovo carattere c in ingresso se
 	 * (x,y) sta all'interno del canvas
-	 * 
+	 *
 	 * @param x l'ascissa dell'elemento da modificare
 	 * @param y l'ordinata dell'elemento da modificare
 	 * @param c il carattere da mettere nella posizione (x,y)
@@ -93,10 +96,13 @@ public class Canvas {
 	public void modifica(int x, int y, char c) {
 		if( this.inBounds(x, y) )
 			this.corrente.caratteri[y][x]= c;
+			/* La matrice &egrave; memorizzata in formato righe x colonne,
+			 * dove il numero di riga d&agrave; l'ordinata, etc.
+			 */
 	}
 
 	/** Traccia un segmento di estremi (x1,y1) e (x2,y2) con il carattere c
-	 * 
+	 *
 	 * @param x1 ascissa del primo estremo
 	 * @param y1 ordinata del primo estremo
 	 * @param x2 ascissa del secondo estremo
@@ -104,9 +110,11 @@ public class Canvas {
 	 * @param c carattere con cui tracciare il segmento
 	 */
 	public void modifica(int x1, int y1, int x2, int y2, char c) {
+
 		int l=Math.abs(x1-x2);
 		int h=Math.abs(y1-y2);
-		if (l>h) {
+
+		if (l>h) { // un carattere per ascissa
 			int x0 = Math.min(x1,x2);
 			int y0 = (x0 == x1 ? y1 : y2);
 			double yPosition = (double) y0;
@@ -116,7 +124,7 @@ public class Canvas {
 				yPosition += angCoeff; // sottinteso che l'incremento in x sia uguale a 1
 			}
 		}
-		else {
+		else { // un carattere per ordinata
 			int y0 = Math.min(y1,y2);
 			int x0 = (y0 == y1 ? x1 : x2);
 			double xPosition = (double) x0;
@@ -126,15 +134,15 @@ public class Canvas {
 				xPosition += invAngCoeff; // sottinteso che l'incremento in y sia uguale a 1
 			}
 		}
-		// accade che con determinati arrotondamenti non stampi uno dei due estremi. 
+		// accade che con determinati arrotondamenti non stampi uno dei due estremi.
 		// qui lo rifaccio nel caso in cui sia necessario
 		this.modifica(x1, y1, c);
 		this.modifica(x2, y2, c);
 	}
-	
+
 	/** Ripristina il canvas allo stato in cui si trovava prima delle ultime k modifiche.
 	 * Ripristina il canvas vuoto se sono state fatte meno di k modifiche
-	 * 
+	 *
 	 * @param k il numero di modifiche da annullare
 	 */
 	public void undo(int k) {
@@ -145,17 +153,17 @@ public class Canvas {
 				break; // esce dal ciclo for se ho tolto tutti i frame
 			}
 		}
-		
+
 		if (this.registroFrame.empty()) { // nel caso in cui il registro sia rimasto vuoto
-			this.registroFrame.push(new Frame(this.getR(), this.getC()));		
+			this.registroFrame.push(new Frame(this.getR(), this.getC()));
 		}
-		
-		corrente = registroFrame.peek();	
+
+		corrente = registroFrame.peek();
 
 	}
-	
+
 	/** Aggiunge in cima al registro una copia del frame attuale
-	 * 
+	 *
 	 */
 	public void addToHistory() {
 		Frame copyOfCurrentFrame = new Frame(this.corrente); // fa una copia del frame corrente
@@ -166,7 +174,7 @@ public class Canvas {
 
 	/** Restituisce un nuovo canvas, copia di quello che chiama il metodo
 	 * Il registro del canvas restituito contiene solo il frame corrente e, sotto questo, il frame vuoto
-	 * 
+	 *
 	 * @return
 	 */
 	public Canvas copia() {
@@ -183,7 +191,7 @@ public class Canvas {
 
 	/** Restituisce un nuovo canvas, copia del rettangolo di estremi (x1,y1),(x2,y2) del canvas che invoca il metodo
 	 * Il registro del canvas restituito contiene solo il frame corrente e, sotto questo, il frame vuoto
-	 * 
+	 *
 	 * @param x1 numero di riga del primo punto
 	 * @param y1 numero di colonna del primo punto
 	 * @param x2 numero di riga del secondo punto
@@ -218,7 +226,7 @@ public class Canvas {
 
 	/** Restituisce true se i due canvas hanno le stesse dimensioni e lo stesso carattere in ogni posizione.
 	 * Controlla soltanto l'ultimo frame nel registro (il frame corrente)
-	 * 
+	 *
 	 * @param newCanvas un altro canvas
 	 * @return true se i frame correnti dei due canvas sono uguali
 	 */
@@ -237,7 +245,7 @@ public class Canvas {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int sumEntries=0;
@@ -246,7 +254,7 @@ public class Canvas {
 				sumEntries+=this.car(i, j);
 		}
 		return sumEntries;
-		
+
 		/*
 		 * &Egrave; verificato che se due canvas si equivalgono secondo equals, abbiano lo stesso hashCode
 		 * Inoltre piccole modifiche al canvas modificano l'hashCode. &Egrave; molto improbabile che due canvas
@@ -265,28 +273,28 @@ public class Canvas {
 		}
 		return stringa;
 	}
-	
+
 	// CLASSE PRIVATA FRAME
 	/** Un frame &egrave; una singola griglia presente nel registro di un canvas
-	 * 
-	 * 
+	 *
+	 *
 	 *
 	 */
-	private class Frame {
-		
+	private static class Frame {
+
 		//ATTRIBUTI
 		int righe;
 		int colonne;
 		public char[][] caratteri;
-		
+
 		//COSTRUTTORI
 		/** Costruisce un frame vuoto di dimensioni date
-		 * 
+		 *
 		 * @param righe il numero di righe del frame
 		 * @param colonne il numero di colonne del frame
 		 */
 		public Frame(int righe, int colonne) {
-			
+
 			this.righe = righe;
 			this.colonne = colonne;
 			try{
@@ -301,9 +309,9 @@ public class Canvas {
 				}
 			}
 		}
-		
+
 		/** Costruisce un nuovo frame identico a un altro
-		 * 
+		 *
 		 * @param altro un altro frame
 		 */
 		public Frame(Frame altro) {

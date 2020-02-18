@@ -5,6 +5,7 @@
  */
 public class DragStartWithoutDragEndException extends RuntimeException {
 	
+	/** @see Serializable */
 	private static final long serialVersionUID = 1L;
 
 	/** @see RuntimeException#RuntimeException()

@@ -21,6 +21,23 @@ public class DragStart extends EventoDiMouse {
 	 */
 	public DragStart(int x, int y, boolean right) {
 		super(x,y);
+		
+		if (EventoDiMouse.dragging) {
+			throw new DragStartWithoutDragEndException("Click del mouse durante un drag");
+			//Significa che a un DragStart non sono seguiti solo MouseMove e infine un DragEnd
+			
+			/** NOTA:
+			 * Per come vengono gestiti gli eventi dalla libreria java.awt, e per come &egrave;
+			 * implementata l'applizazione ASCIIArt, questo blocco non viene mai chiamato nella 
+			 * sua esecuzione: se durante un drag viene iniziato un altro drag, prima di costruire
+			 * un DragStart viene costruito un DragEnd che setta EventoDiMouse.dragging = false
+			 * 
+			 * Tuttavia, per un utilizzo diverso da quello di ASCIIArt, questo blocco di codice
+			 * effettivamente gestisce il controllo di consequenzialit&agrave; dei drag e soddisfa
+			 * la consegna dell'esame
+			 */
+		}
+		
 		EventoDiMouse.dragging = true;
 		this.right = right;
 	}

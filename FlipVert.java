@@ -1,12 +1,15 @@
 public class FlipVert extends StrumentoDiSelezione {
 	
   //COSTRUTTORI
+	/** @see Strumento#Strumento(Canvas)
+	*/
   public FlipVert(Canvas canvas) {
 	  super(canvas);
   }
 
   //METODI
 
+  @Override
   public void azione() {	  
   int l = Math.abs(pIniziale.posx() - pFinale.posx()); //larghezza
   int h = (int) Math.round(Math.abs(pIniziale.posy() - pFinale.posy()) / 2.0); //altezza partendo dall'asse di simmetria

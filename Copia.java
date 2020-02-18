@@ -1,12 +1,15 @@
 public class Copia extends StrumentoDiSelezione {
 
   //COSTRUTTORI
+	/** @see Strumento#Strumento(Canvas)
+	*/
   public Copia(Canvas canvas) {
 	  super(canvas);
   }
 
   //METODI
   
+  @Override
   public void azione() {
 	  
 	  int l = Math.abs(pIniziale.posx() - pFinale.posx());
